@@ -1,9 +1,9 @@
-package edu.byu.cstaheli.cs453;
+package edu.byu.cstaheli.cs453.util;
 
 import java.io.*;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.HashSet;
-//import utils.DataBase;
 
 /**
  * @author rajiv
@@ -11,13 +11,13 @@ import java.util.HashSet;
  */
 public class StopWordsRemover
 {
-    private HashSet<String> stopWords;
-    private HashSet<String> validWords;
+    private Set<String> stopWords;
+    //private Set<String> validWords;
 
     public StopWordsRemover()
     {
         stopWords = new HashSet<>();
-        validWords = new HashSet<>();
+        //validWords = new HashSet<>();
         try
         {
             // Read the unordered file in
@@ -46,12 +46,12 @@ public class StopWordsRemover
         }
     }
 
-    public HashSet<String> getStopWords()
+    public Set<String> getStopWords()
     {
         return stopWords;
     }
 
-    public void setStopWord(HashSet<String> words)
+    public void setStopWords(Set<String> words)
     {
         stopWords = words;
     }
