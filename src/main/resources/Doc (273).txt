@@ -1,0 +1,1 @@
+This directory contains 13 sub-directories, each contains PA copy on showbusiness on the given days identified.  Each day contains a number of catchlines - where a catchline is a word that identifies each showbusiness story on a given day.
