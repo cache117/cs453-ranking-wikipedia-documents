@@ -12,8 +12,18 @@ import java.util.Set;
 public class Dictionary
 {
     private Set<String> dictionaryWords;
+    private static Dictionary _instance;
 
-    public Dictionary()
+    public static Dictionary getInstance()
+    {
+        if (_instance == null)
+        {
+            _instance = new Dictionary();
+        }
+        return _instance;
+    }
+
+    private Dictionary()
     {
         dictionaryWords = new HashSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("dictionary.txt")))

@@ -13,8 +13,18 @@ public class StopWordsRemover
 {
     private Set<String> stopWords;
     //private Set<String> validWords;
+    private static StopWordsRemover _instance;
 
-    public StopWordsRemover()
+    public static StopWordsRemover getInstance()
+    {
+        if (_instance == null)
+        {
+            _instance = new StopWordsRemover();
+        }
+        return _instance;
+    }
+
+    private StopWordsRemover()
     {
         stopWords = new HashSet<>();
         //validWords = new HashSet<>();
