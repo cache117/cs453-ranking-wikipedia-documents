@@ -40,6 +40,7 @@ public class Driver
                     {
                         String fileName = filePath.toString();
                         DocumentProcessor documentProcessor = new DocumentProcessor(fileName);
+
                         Map<String, Integer> wordCounts = documentProcessor.getWordCounts();
                         for (Map.Entry<String, Integer> entry : wordCounts.entrySet())
                         {

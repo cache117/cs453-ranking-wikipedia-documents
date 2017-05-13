@@ -8,10 +8,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by cstaheli on 5/11/2017.
@@ -22,7 +19,7 @@ public class DocumentProcessor
 
     public DocumentProcessor(String fileName)
     {
-        wordCounts = new HashMap<>();
+        wordCounts = new TreeMap<>();
         try
         {
             List<String> lines = Files.readAllLines(Paths.get(fileName), Charset.forName("ISO-8859-1"));

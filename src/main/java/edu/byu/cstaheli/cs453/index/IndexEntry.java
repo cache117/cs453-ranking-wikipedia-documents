@@ -46,9 +46,33 @@ public class IndexEntry implements Comparable<IndexEntry>
         return String.format("{%s:%s:%s}", word, documentId, frequency);
     }
 
-    public int compareTo(IndexEntry other)
-    {
-        return this.word.compareTo(other.word);
+//    public int compareTo(IndexEntry other)
+
+//    {
+//        return this.word.compareTo(other.word);
+//    }
+
+    @Override
+    public int compareTo(IndexEntry other) {
+        int frequencyComparison = Integer.compare(this.frequency, other.frequency);
+        //overall ordering is flipped (Index uses reversed ordering for IndexEntry),
+        // so flip the word and document id comparisons
+        if (frequencyComparison == 0)
+        {
+            int wordComparison = other.word.compareTo(this.word);
+            if (wordComparison == 0)
+            {
+                return Integer.compare(other.getDocumentId(), this.documentId);
+            }
+            else
+            {
+                return wordComparison;
+            }
+        }
+        else
+        {
+            return frequencyComparison;
+        }
     }
 
     public String getWord()
