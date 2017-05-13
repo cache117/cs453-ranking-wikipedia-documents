@@ -47,8 +47,7 @@ public class WordTokenizer
 
     private String stripExtraCharacters(String word)
     {
-        word = word.replaceAll("[^\\w]+", "");
-        return word;
+        return word.replaceAll("[^\\w]+", "");
     }
 
     private void parseHyphenatedWord(String word)

@@ -1,5 +1,6 @@
 package edu.byu.cstaheli.cs453;
 
+import com.sun.istack.internal.Nullable;
 import edu.byu.cstaheli.cs453.util.PorterStemmer;
 import edu.byu.cstaheli.cs453.util.StopWordsRemover;
 
@@ -7,16 +8,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cstaheli on 5/11/2017.
  */
 public class DocumentProcessor
 {
-    private List<String> document;
+    private Map<String, Integer> wordCounts;
+
     public DocumentProcessor(String fileName)
     {
+        wordCounts = new HashMap<>();
         try
         {
             List<String> lines = Files.readAllLines(Paths.get(fileName));
@@ -25,13 +30,19 @@ public class DocumentProcessor
                 List<String> words = new WordTokenizer(line).getWords();
                 List<String> nonStopwords = removeStopwords(words);
                 List<String> stemmedWords = stemWords(nonStopwords);
-                document.addAll(stemmedWords);
+                addToWordCounts(stemmedWords);
             }
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+    }
+
+    @Nullable
+    public Integer getCount(String word)
+    {
+        return wordCounts.get(word);
     }
 
     private List<String> stemWords(List<String> words)
@@ -60,5 +71,14 @@ public class DocumentProcessor
             }
         }
         return nonStopwords;
+    }
+
+    private void addToWordCounts(List<String> words)
+    {
+        for (String word : words)
+        {
+            Integer count = wordCounts.get(word);
+            wordCounts.put(word, (count == null) ? 1 : count + 1);
+        }
     }
 }
