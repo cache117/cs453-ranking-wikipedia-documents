@@ -5,6 +5,7 @@ import edu.byu.cstaheli.cs453.util.PorterStemmer;
 import edu.byu.cstaheli.cs453.util.StopWordsRemover;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,13 +25,17 @@ public class DocumentProcessor
         wordCounts = new HashMap<>();
         try
         {
-            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            List<String> lines = Files.readAllLines(Paths.get(fileName), Charset.forName("ISO-8859-1"));
+            //List<String> lines = Files.readAllLines(Paths.get(fileName));
             for (String line : lines)
             {
-                List<String> words = new WordTokenizer(line).getWords();
-                List<String> nonStopwords = removeStopwords(words);
-                List<String> stemmedWords = stemWords(nonStopwords);
-                addToWordCounts(stemmedWords);
+                if (line.length() > 0)
+                {
+                    List<String> words = new WordTokenizer(line).getWords();
+                    List<String> nonStopwords = removeStopwords(words);
+                    List<String> stemmedWords = stemWords(nonStopwords);
+                    addToWordCounts(stemmedWords);
+                }
             }
         }
         catch (IOException e)
@@ -43,6 +48,11 @@ public class DocumentProcessor
     public Integer getCount(String word)
     {
         return wordCounts.get(word);
+    }
+
+    public Map<String, Integer> getWordCounts()
+    {
+        return wordCounts;
     }
 
     private List<String> stemWords(List<String> words)

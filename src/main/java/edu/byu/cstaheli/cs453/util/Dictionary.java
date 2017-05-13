@@ -26,7 +26,7 @@ public class Dictionary
     private Dictionary()
     {
         dictionaryWords = new HashSet<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("dictionary.txt")))
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/dictionary.txt")))
         {
             String line;
             while ((line = reader.readLine()) != null)

@@ -31,7 +31,7 @@ public class StopWordsRemover
         try
         {
             // Read the unordered file in
-            BufferedReader in = new BufferedReader(new FileReader("stopwords.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("src/main/resources/stopwords.txt"));
             StringBuilder str = new StringBuilder();
             String nextLine;
             while ((nextLine = in.readLine()) != null)

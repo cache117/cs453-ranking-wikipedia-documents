@@ -9,8 +9,8 @@
         <module name="cs453-ranking-wikipedia-documents" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="cs453-ranking-wikipedia-documents" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="cs453-ranking-wikipedia-documents" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

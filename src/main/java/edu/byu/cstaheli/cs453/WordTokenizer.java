@@ -36,13 +36,16 @@ public class WordTokenizer
     private void parseWord(String word)
     {
         word = stripExtraCharacters(word);
-        if (!word.matches(".*\\d+.*"))
+        //words with numbers shouldn't be added
+        if (!wordContainsNumbers(word))
         {
-            if (Dictionary.getInstance().wordExists(word))
-            {
-                tokens.add(word.toLowerCase());
-            }
+            tokens.add(word.toLowerCase());
         }
+    }
+
+    private boolean wordContainsNumbers(String word)
+    {
+        return word.matches(".*\\d+.*");
     }
 
     private String stripExtraCharacters(String word)
@@ -53,21 +56,32 @@ public class WordTokenizer
     private void parseHyphenatedWord(String word)
     {
         String[] hyphenatedWords = word.split("-");
-        assert hyphenatedWords.length == 2;
         for (int i = 0; i < hyphenatedWords.length; ++i)
         {
             hyphenatedWords[i] = stripExtraCharacters(hyphenatedWords[i]);
         }
-        String concatenatedWord = hyphenatedWords[0] + hyphenatedWords[1];
+        String concatenatedWord = concatenateHyphenatedWords(hyphenatedWords);
         if (Dictionary.getInstance().wordExists(concatenatedWord))
         {
             parseWord(concatenatedWord);
         }
         else
         {
-            parseWord(hyphenatedWords[0]);
-            parseWord(hyphenatedWords[1]);
+            for (String hyphenatedWord : hyphenatedWords)
+            {
+                parseWord(hyphenatedWord);
+            }
         }
+    }
+
+    private String concatenateHyphenatedWords(String[] hyphenatedWords)
+    {
+        StringBuilder concatenatedWordBuilder = new StringBuilder();
+        for (String hyphenatedWord : hyphenatedWords)
+        {
+            concatenatedWordBuilder.append(hyphenatedWord);
+        }
+        return concatenatedWordBuilder.toString();
     }
 
     public List<String> getWords()

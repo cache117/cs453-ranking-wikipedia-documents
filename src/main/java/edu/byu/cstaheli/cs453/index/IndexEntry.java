@@ -9,9 +9,9 @@ public class IndexEntry implements Comparable<IndexEntry>
 {
     private String word;
     private int frequency;
-    private String documentId;
+    private int documentId;
 
-    public IndexEntry(String word, int frequency, String documentId)
+    public IndexEntry(String word, int frequency, int documentId)
     {
         this.word = word;
         this.frequency = frequency;
@@ -27,8 +27,8 @@ public class IndexEntry implements Comparable<IndexEntry>
         IndexEntry that = (IndexEntry) o;
 
         if (frequency != that.frequency) return false;
-        if (!word.equals(that.word)) return false;
-        return documentId.equals(that.documentId);
+        if (documentId != that.documentId) return false;
+        return word.equals(that.word);
     }
 
     @Override
@@ -36,8 +36,14 @@ public class IndexEntry implements Comparable<IndexEntry>
     {
         int result = word.hashCode();
         result = 31 * result + frequency;
-        result = 31 * result + documentId.hashCode();
+        result = 31 * result + documentId;
         return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("{%s:%s:%s}", word, documentId, frequency);
     }
 
     public int compareTo(IndexEntry other)
@@ -55,7 +61,7 @@ public class IndexEntry implements Comparable<IndexEntry>
         return frequency;
     }
 
-    public String getDocumentId()
+    public int getDocumentId()
     {
         return documentId;
     }
