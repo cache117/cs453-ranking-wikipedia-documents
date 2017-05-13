@@ -1,15 +1,13 @@
 package edu.byu.cstaheli.cs453.index;
 
-import java.util.Comparator;
-
 /**
  * Created by cstaheli on 5/12/2017.
  */
 public class IndexEntry implements Comparable<IndexEntry>
 {
-    private String word;
-    private int frequency;
-    private int documentId;
+    private final String word;
+    private final int frequency;
+    private final int documentId;
 
     public IndexEntry(String word, int frequency, int documentId)
     {
@@ -45,12 +43,6 @@ public class IndexEntry implements Comparable<IndexEntry>
     {
         return String.format("{%s:%s:%s}", word, documentId, frequency);
     }
-
-//    public int compareTo(IndexEntry other)
-
-//    {
-//        return this.word.compareTo(other.word);
-//    }
 
     @Override
     public int compareTo(IndexEntry other) {

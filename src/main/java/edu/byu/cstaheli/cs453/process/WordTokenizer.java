@@ -1,6 +1,6 @@
-package edu.byu.cstaheli.cs453;
+package edu.byu.cstaheli.cs453.process;
 
-import edu.byu.cstaheli.cs453.util.Dictionary;
+import edu.byu.cstaheli.cs453.process.util.Dictionary;
 
 import java.util.*;
 

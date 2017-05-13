@@ -1,4 +1,4 @@
-package edu.byu.cstaheli.cs453.util;
+package edu.byu.cstaheli.cs453.process.util;
 
 /**
  * This class implements the PORTER stemming algorithm, which
