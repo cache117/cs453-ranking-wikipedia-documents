@@ -27,7 +27,8 @@ public class QueryResult implements Comparable<QueryResult>
     @Override
     public int compareTo(QueryResult other)
     {
-        int scoreComparison = Double.compare(this.rankingScore, other.rankingScore);
+        //Reverse ordering
+        int scoreComparison = Double.compare(other.rankingScore, this.rankingScore);
         if (scoreComparison != 0)
         {
             return scoreComparison;
@@ -36,5 +37,11 @@ public class QueryResult implements Comparable<QueryResult>
         {
             return Integer.compare(this.documentId, other.documentId);
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("{%s:%s}", documentId, rankingScore);
     }
 }

@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 import java.util.stream.Stream;
 
 /**
@@ -30,37 +30,37 @@ public class Driver
     {
         Driver driver = new Driver();
         driver.readInCorpus("src/main/resources");
-        List<QueryResult> results = driver.runQuery("killing incident");
-        driver.handleResults(results);
-        results = driver.runQuery("suspect charged with murder");
-        driver.handleResults(results);
-        results = driver.runQuery("court");
-        driver.handleResults(results);
-        results = driver.runQuery("jury sentenced murderer to prison");
-        driver.handleResults(results);
-        results = driver.runQuery("movie");
-        driver.handleResults(results);
-        results = driver.runQuery("entertainment films");
-        driver.handleResults(results);
-        results = driver.runQuery("court appeal");
-        driver.handleResults(results);
-        results = driver.runQuery("action film producer");
-        driver.handleResults(results);
-        results = driver.runQuery("drunk driving accusations");
-        driver.handleResults(results);
-        results = driver.runQuery("actor appeared in movie premiere");
-        driver.handleResults(results);
-    }
-
-    private void handleResults(List<QueryResult> results)
-    {
-        for (QueryResult result : results)
+        String[] query = {
+//                "James Bond Actors",
+                "killing incident",
+                "suspect charged with murder",
+                "court",
+                "jury sentenced murderer to prison",
+                "movie",
+                "entertainment films",
+                "court appeal",
+                "action film producer",
+                "drunk driving accusations",
+                "actor appeared in movie premiere"
+        };
+        for (String queryString : query)
         {
-
+            SortedSet<QueryResult> results = driver.runQuery(queryString);
+            driver.handleResults(queryString, results);
         }
     }
 
-    private List<QueryResult> runQuery(String queryString)
+    private void handleResults(String queryString, SortedSet<QueryResult> results)
+    {
+        System.out.println("Query: " + queryString);
+        for (QueryResult result : results)
+        {
+            System.out.printf("Doc: %d, Score: %s\n", result.getDocumentId(), result.getRankingScore());
+        }
+        System.out.println();
+    }
+
+    private SortedSet<QueryResult> runQuery(String queryString)
     {
         Query query = new Query(queryString);
         return query.getResults();
