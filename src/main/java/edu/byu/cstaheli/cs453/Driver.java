@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.stream.Stream;
@@ -55,7 +56,7 @@ public class Driver
         System.out.println("Query: " + queryString);
         for (QueryResult result : results)
         {
-            System.out.printf("Doc: %d, Score: %s\n", result.getDocumentId(), result.getRankingScore());
+            System.out.printf("Doc: %d, Score: %.4f\n", result.getDocumentId(), result.getRankingScore());
         }
         System.out.println();
     }
